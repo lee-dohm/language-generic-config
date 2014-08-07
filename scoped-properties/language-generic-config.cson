@@ -1,0 +1,3 @@
+'.source.generic-config':
+  'editor':
+    'commentStart': '# '

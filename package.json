@@ -1,0 +1,12 @@
+{
+  "name": "language-generic-config",
+  "version": "0.0.0",
+  "description": "Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments",
+  "repository": "https://github.com/lee-dohm/language-generic-config",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.60.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
