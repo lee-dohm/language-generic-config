@@ -1,6 +1,6 @@
 'fileTypes': [
-  '.gitignore'
-  '.conf'
+  'gitignore'
+  'conf'
 ]
 'name': 'Generic Configuration'
 'patterns': [
