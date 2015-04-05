@@ -1,6 +1,6 @@
 {
   "name": "language-generic-config",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments",
   "repository": "https://github.com/lee-dohm/language-generic-config",
   "license": "MIT",
