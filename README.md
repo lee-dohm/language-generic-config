@@ -1,4 +1,4 @@
-# Generic Config Language
+# Generic Config Language [![Dependency Status](https://david-dm.org/lee-dohm/language-generic-config.svg)](https://david-dm.org/lee-dohm/language-generic-config)
 
 Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments with no particular structure, like `.gitignore` files.
 
