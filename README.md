@@ -1,6 +1,11 @@
-# Generic Config Language [![Dependency Status](https://david-dm.org/lee-dohm/language-generic-config.svg)](https://david-dm.org/lee-dohm/language-generic-config)
+# Generic Config Language
 
-Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments with no particular structure, like `.gitignore` files.
+[![Build Status](https://img.shields.io/travis/lee-dohm/language-generic-config.svg)](https://travis-ci.org/lee-dohm/language-generic-config)
+[![Package Version](https://img.shields.io/apm/v/language-generic-config.svg)](https://atom.io/packages/language-generic-config)
+[![Package Downloads](https://img.shields.io/apm/dm/language-generic-config.svg)](https://atom.io/packages/language-generic-config)
+[![Dependency Status](https://img.shields.io/david/lee-dohm/language-generic-config.svg)](https://david-dm.org/lee-dohm/language-generic-config)
+
+Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments with no particular structure, like `.gitignore` or `.gitattributes` files.
 
 ![Sample configuration](https://raw.githubusercontent.com/lee-dohm/language-generic-config/master/sample.png)
 
