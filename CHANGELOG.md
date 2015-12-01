@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.0.0** &mdash; *Released: 30 November 2015*
+
+* PR [#6](https://github.com/lee-dohm/language-generic-config/pull/6) by [@Alhadis](https://github.com/Alhadis) &mdash; Add .gitattributes to affected file extensions
+
 ## **v0.2.0** &mdash; *Released: 2 May 2015*
 
 * Cleanup in preparation for Deprecation Day
