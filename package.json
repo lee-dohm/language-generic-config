@@ -1,7 +1,7 @@
 {
   "name": "language-generic-config",
   "author": "Lee Dohm <lee@lee-dohm.com>",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments",
   "keywords": [
     "generic",
