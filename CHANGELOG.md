@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## **v1.1.0** &mdash; *Released: 7 May 2016*
+
+* PR [#7](https://github.com/lee-dohm/language-generic-config/pull/7) by [@Alhadis](https://github.com/Alhadis) &mdash; Add more file types:
+    * `.ctags`
+    * `.hgignore`
+    * `.mailmap`
+    * `.stylelintignore`
+
 ## **v1.0.0** &mdash; *Released: 30 November 2015*
 
 * PR [#6](https://github.com/lee-dohm/language-generic-config/pull/6) by [@Alhadis](https://github.com/Alhadis) &mdash; Add .gitattributes to affected file extensions
