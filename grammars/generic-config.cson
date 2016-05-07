@@ -2,6 +2,10 @@
   'gitattributes'
   'gitignore'
   'conf'
+  'ctags'
+  'hgignore'
+  'mailmap'
+  'stylelintignore'
 ]
 'name': 'Generic Configuration'
 'patterns': [
