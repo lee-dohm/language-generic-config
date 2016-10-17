@@ -6,6 +6,7 @@
   'hgignore'
   'mailmap'
   'stylelintignore'
+  'cfg'
 ]
 'name': 'Generic Configuration'
 'patterns': [
