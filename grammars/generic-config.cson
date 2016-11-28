@@ -1,5 +1,7 @@
 'fileTypes': [
   'gitattributes'
+  '.config/git/ignore'
+  '.git/info/exclude'
   'gitignore'
   'conf'
   'ctags'
