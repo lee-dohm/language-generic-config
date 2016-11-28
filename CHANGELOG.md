@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.3.0** &mdash; *Released: 2016-11-27*
+
+* PR [#9](https://github.com/lee-dohm/language-generic-config/pull/9) by [@yudai-nkt](https://github.com/yudai-nkt) &mdash; Add support for gitignores other than `.gitignore`
+
 ## **v1.2.0** &mdash; *Released: 2016-10-17*
 
 * PR [#8](https://github.com/lee-dohm/language-generic-config/pull/8) by [@fff](https://github.com/fff) &mdash; Add 'cfg' as config file suffix
