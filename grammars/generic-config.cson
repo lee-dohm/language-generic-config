@@ -1,3 +1,5 @@
+'scopeName': 'text.generic-config'
+'name': 'Generic Configuration'
 'fileTypes': [
   'gitattributes'
   '.config/git/ignore'
@@ -10,7 +12,6 @@
   'stylelintignore'
   'cfg'
 ]
-'name': 'Generic Configuration'
 'patterns': [
   {
     'include': '#comment'
@@ -18,14 +19,17 @@
 ]
 'repository':
   'comment':
-    'captures':
-      '1':
+    'patterns': [
+      {
+        'begin': '#'
+        'beginCaptures': 'punctuation.definition.comment.generic-config'
+        'end': '$\\n?'
         'name': 'comment.line.number-sign.generic-config'
-      '2':
-        'name': 'punctuation.definition.comment.generic-config'
-      '3':
+      }
+      {
+        'begin': ';'
+        'beginCaptures': 'punctuation.definition.comment.generic-config'
+        'end': '$\\n?'
         'name': 'comment.line.semi-colon.generic-config'
-      '4':
-        'name': 'punctuation.definition.comment.generic-config'
-    'match': '((#).*$\\n?)|((;).*$\\n?)'
-'scopeName': 'text.generic-config'
+      }
+    ]
