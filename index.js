@@ -49,7 +49,8 @@ module.exports = {
 	canAutoMatch(editor){
 		return atom.workspace.isTextEditor(editor)
 			&& !this.affectedEditors.has(editor)
-			&& !atom.textEditors.getGrammarOverride(editor);
+			&& !atom.textEditors.getGrammarOverride(editor)
+			&&  atom.grammars.nullGrammar === editor.getGrammar();
 	},
 	
 	
