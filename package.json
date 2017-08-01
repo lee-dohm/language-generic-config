@@ -18,18 +18,21 @@
     "enableAutomatch": {
       "type": "boolean",
       "default": true,
-      "description": "Assign grammar to files which contain comment-like sequences, but don't match any specific language."
+      "description": "Assign grammar to files which contain comment-like sequences, but don't match any specific language.",
+      "order": 1
     },
     "automatchPattern": {
       "type": "string",
       "default": "^\\s*[;#]\\s",
-      "description": "Regular expression which determines what lines of a generic-config file are comments."
+      "description": "Regular expression which determines what lines of a generic-config file are comments.",
+      "order": 2
     },
     "requireMinimumMatchingLines": {
       "type": "number",
       "default": 2,
       "min": 1,
-      "description": "Limit automatching to files containing at least *`N`* lines which match `automatchPattern`."
+      "description": "Limit automatching to files containing at least *`n`* lines that match `automatchPattern`.",
+      "order": 3
     }
   }
 }

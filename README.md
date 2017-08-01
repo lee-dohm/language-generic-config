@@ -7,11 +7,9 @@
 
 Provides basic syntax highlighting for configuration files that are just composed of comments or non-comments with no particular structure, like `.gitignore` or `.gitattributes` files.
 
-<img alt="Sample configuration" width="370" src="https://raw.githubusercontent.com/lee-dohm/language-generic-config/master/sample-1.png" />
+<img alt="Sample configuration" width="370" src="sample-1.png" />
 
-## Notes
-
-The package currently supports lines that begin with `#` or `;` as comments.
+The package supports formats which use `#` or `;` to introduce comments.
 
 ## Auto-matching "probable" config files
 
@@ -34,10 +32,10 @@ smcup=\E[?47h,
 
 With the package's default configuration, the above code will look like this:
 
-<img alt="Sample 2" width="433" src="https://raw.githubusercontent.com/lee-dohm/language-generic-config/master/sample-2.png" />
+<img alt="Sample 2" width="433" src="sample-2.png" />
 
 You can customise how the package interprets "comment-lines" by tweaking the `automatchPattern` field in the package settings.
-By default, it activates the grammar for anything with lines that start with `# ` or `; `:
+By default, the grammar is activated for any unknown file containing lines which start with `# ` or `; `:
 
 ~~~
 # Comment
@@ -50,4 +48,4 @@ By default, it activates the grammar for anything with lines that start with `# 
 
 ## Copyright
 
-Copyright &copy; 2014-2016 by [Lee Dohm](http://www.lee-dohm.com) and [Lifted Studios](http://www.liftedstudios.com). See [LICENSE](https://github.com/lee-dohm/language-generic-config/blob/master/LICENSE.md) for details.
+Copyright &copy; 2014-2017 by [Lee Dohm](http://www.lee-dohm.com) and [Lifted Studios](http://www.liftedstudios.com). See [LICENSE](https://github.com/lee-dohm/language-generic-config/blob/master/LICENSE.md) for details.
