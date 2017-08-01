@@ -15,15 +15,15 @@
     "atom": ">=0.196.0 <2.0.0"
   },
   "configSchema": {
-    "automatchEnabled": {
+    "enableAutomatch": {
       "type": "boolean",
       "default": true,
-      "description": "When opening a file without a known filetype, assign the `generic-config` grammar if the file contains comment-like sequences."
+      "description": "Assign grammar to files which contain comment-like sequences, but don't match any specific language."
     },
     "automatchPattern": {
       "type": "string",
       "default": "^\\s*[;#]\\s",
-      "description": "A regular expression that dictates what a &ldquo;comment-like sequence&rdquo; is."
+      "description": "Regular expression which determines what lines of a generic-config file are comments."
     },
     "requireMinimumMatchingLines": {
       "type": "number",
