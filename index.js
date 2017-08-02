@@ -112,6 +112,8 @@ module.exports = {
 	 * @internal
 	 */
 	unassignGrammar(editor){
+		if(!this.affectedEditors)
+			return;
 		const disposables = this.affectedEditors.get(editor);
 		if(disposables)
 			disposables.dispose();
