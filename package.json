@@ -13,5 +13,31 @@
   "license": "MIT",
   "engines": {
     "atom": ">=0.196.0 <2.0.0"
+  },
+  "atomTestRunner": "./spec/runner",
+  "devDependencies": {
+    "atom-mocha-test-runner": "1.0.1",
+    "chai": "^3.5.0"
+  },
+  "configSchema": {
+    "enableAutomatch": {
+      "type": "boolean",
+      "default": true,
+      "description": "Assign grammar to files which contain comment-like sequences, but don't match any specific language.",
+      "order": 1
+    },
+    "automatchPattern": {
+      "type": "string",
+      "default": "^\\s*[;#]\\s",
+      "description": "Regular expression which determines what lines of a generic-config file are comments.",
+      "order": 2
+    },
+    "requireMinimumMatchingLines": {
+      "type": "number",
+      "default": 2,
+      "min": 1,
+      "description": "Limit automatching to files containing at least *`n`* lines that match `automatchPattern`.",
+      "order": 3
+    }
   }
 }
