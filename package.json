@@ -14,6 +14,11 @@
   "engines": {
     "atom": ">=0.196.0 <2.0.0"
   },
+  "atomTestRunner": "./spec/runner",
+  "devDependencies": {
+    "atom-mocha-test-runner": "1.0.1",
+    "chai": "^3.5.0"
+  },
   "configSchema": {
     "enableAutomatch": {
       "type": "boolean",

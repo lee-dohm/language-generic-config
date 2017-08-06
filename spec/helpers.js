@@ -40,9 +40,9 @@ function waitToSettle(){
 }
 
 function waitToOpen(fixtureFile){
-	return waitsForPromise(() => new Promise(done => {
+	return new Promise(done => {
 		return open(fixtureFile)
 			.then(() => waitToSettle())
 			.then(() => done())
-	}))
+	})
 }
