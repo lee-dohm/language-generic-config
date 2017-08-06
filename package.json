@@ -42,6 +42,7 @@
     }
   },
   "standard": {
-    "globals": [ "atom" ]
+    "env": "mocha",
+    "globals": [ "atom", "expect" ]
   }
 }
