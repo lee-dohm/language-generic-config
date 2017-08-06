@@ -7,26 +7,21 @@ const OPT_AM_ENABLE = `${PACKAGE_NAME}.enableAutomatch`;
 const OPT_AM_REGEXP = `${PACKAGE_NAME}.automatchPattern`;
 const OPT_MIN_LINES = `${PACKAGE_NAME}.requireMinimumMatchingLines`;
 
+let autoMatchEnabled = undefined;
+let autoMatchPattern = /^\s*[;#]\s/gm;
+let editorObserver   = null;
 
 module.exports = {
-	autoMatchPattern: /(?=N)A/,
-	autoMatchEnabled: true,
-	
 	activate(){
 		this.affectedEditors = new Map();
 		this.disposables = new CompositeDisposable(
 			atom.config.observe(OPT_AM_REGEXP, value => {
 				this.autoMatchPattern = new RegExp(value, "gm");
 			}),
-			atom.config.observe(OPT_AM_ENABLE, value => {
-				this.autoMatchEnabled = !!value;
-				if(!this.autoMatchEnabled && this.affectedEditors.size)
-					this.unassignAll();
-			}),
-			atom.workspace.observeTextEditors(editor => {
-				if(this.canAutoMatch(editor) && this.testAutoMatch(editor))
-					this.assignGrammar(editor);
-			})
+			atom.config.observe(OPT_AM_ENABLE, value => value
+				? this.enableAutoMatch()
+				: this.disableAutoMatch()
+			)
 		);
 	},
 	
@@ -40,6 +35,55 @@ module.exports = {
 	
 	
 	/**
+	 * Register handlers to respond to files which quack like configs.
+	 * @internal
+	 */
+	enableAutoMatch(){
+		if(autoMatchEnabled) return;
+		autoMatchEnabled = true;
+		
+		// Duplicate observers shouldn't exist… but better safe than sorry.
+		if(this.editorObserver)
+			this.editorObserver.dispose();
+		
+		this.editorObserver = atom.workspace.observeTextEditors(editor => {
+			// Only check editor's contents after a brief timeout, so other language
+			// packages have a chance to do what we're doing (matching based on content).
+			setTimeout(() => {
+				if(this.canAutoMatch(editor) && this.testAutoMatch(editor))
+					this.assignGrammar(editor);
+			}, 100);
+		});
+	},
+	
+	
+	/**
+	 * Disable the package's auto-matching feature.
+	 *
+	 * Note that due to an (apparent) bug with Atom's highlighting, it's not
+	 * possible to remove a file's highlighting when assigning {@link NullGrammar}.
+	 * @internal
+	 */
+	disableAutoMatch(){
+		if(!autoMatchEnabled && null == autoMatchEnabled) return;
+		autoMatchEnabled = false;
+		
+		if(this.affectedEditors.size){
+			const entries = Array.from(this.affectedEditors);
+			for(const [editor, disposables] of entries){
+				disposables.dispose();
+				this.affectedEditors.delete(editor);
+			}
+		}
+		
+		if(this.editorObserver){
+			this.editorObserver.dispose();
+			this.editorObserver = null;
+		}
+	},
+	
+	
+	/**
 	 * Determine whether a {@link TextEditor} can be overridden by the package.
 	 *
 	 * @param {TextEditor} editor
@@ -48,6 +92,7 @@ module.exports = {
 	 */
 	canAutoMatch(editor){
 		return atom.workspace.isTextEditor(editor)
+			&& editor.isAlive()
 			&& !this.affectedEditors.has(editor)
 			&& !atom.textEditors.getGrammarOverride(editor)
 			&&  atom.grammars.nullGrammar === editor.getGrammar();
@@ -118,16 +163,4 @@ module.exports = {
 		if(disposables)
 			disposables.dispose();
 	},
-	
-	
-	/**
-	 * Remove grammar overrides from *all* currently-affected editors.
-	 * @internal
-	 */
-	unassignGrammarFromAll(){
-		for(const [editor, disposables] of [...this.affectedEditors]){
-			disposables.dispose();
-			this.affectedEditors.delete(editor);
-		}
-	}
 };
