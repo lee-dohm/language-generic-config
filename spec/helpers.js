@@ -1,5 +1,5 @@
-const path = require("path");
-let editor = null;
+const path = require('path')
+let editor = null
 
 module.exports = {
 	getEditor: () => editor,
@@ -8,41 +8,41 @@ module.exports = {
 	wait,
 	waitToOpen,
 	waitToSettle,
-};
+}
 
 function open(fileName){
-	const projectPath = path.join(__dirname, "fixtures", fileName);
+	const projectPath = path.join(__dirname, 'fixtures', fileName)
 	return atom.workspace.open(projectPath).then(openedEditor =>
-		Promise.resolve(editor = openedEditor));
+		Promise.resolve(editor = openedEditor))
 }
 
 function expectScopeToBe(...args){
-	const grammar = editor.getGrammar();
-	return expect (grammar ? grammar.scopeName : "").toBe(...args);
+	const grammar = editor.getGrammar()
+	return expect (grammar ? grammar.scopeName : '').toBe(...args)
 }
 
 function wait(delay = 100){
 	return new Promise(resolve => {
-		setTimeout(() => resolve(), delay);
-	});
+		setTimeout(() => resolve(), delay)
+	})
 }
 
 function waitToSettle(){
 	return new Promise(done => {
 		if(editor.buffer.stoppedChangingTimeout){
 			const cd = editor.onDidStopChanging(() => {
-				cd.dispose();
-				done(editor);
-			});
+				cd.dispose()
+				done(editor)
+			})
 		}
-		else done(editor);
-	});
+		else done(editor)
+	})
 }
 
 function waitToOpen(fixtureFile){
 	return waitsForPromise(() => new Promise(done => {
 		return open(fixtureFile)
 			.then(() => waitToSettle())
-			.then(() => done());
-	}));
+			.then(() => done())
+	}))
 }
