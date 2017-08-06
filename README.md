@@ -16,7 +16,7 @@ The package supports formats which use `#` or `;` to introduce comments.
 Many generic configs in the wild use no standard file extension, or any extension at all.
 The package is able to match unfamiliar configs as long as they contain "comment-like" lines:
 
-~~~
+```
 # When updating this file, etc/e/eterm-colour should be
 # rebuild with "make e/eterm-colour" in the etc directory.
 cub=\E[%p1%dD,
@@ -28,7 +28,7 @@ cuf=\E[%p1%dC,
 #rmcup=\E[?47l,
 # rs2 may need to be added
 smcup=\E[?47h,
-~~~
+```
 
 With the package's default configuration, the above code will look like this:
 
@@ -37,14 +37,14 @@ With the package's default configuration, the above code will look like this:
 You can customise how the package interprets "comment-like" by tweaking the `automatchPattern` field in the package settings.
 By default, the grammar is activated for any unknown file containing lines which start with `# ` or `; `:
 
-~~~
+```
 # Comment
 #1 - Not
 #2 - considered
 #3 - comments
 ; Comment
 ;1 - As above…
-~~~
+```
 
 ## License
 
