@@ -40,5 +40,8 @@
       "description": "Limit automatching to files containing at least *`n`* lines that match `automatchPattern`.",
       "order": 3
     }
+  },
+  "standard": {
+    "globals": [ "atom" ]
   }
 }
