@@ -46,6 +46,6 @@ By default, the grammar is activated for any unknown file containing lines which
 ;1 - As above…
 ~~~
 
-## Copyright
+## License
 
-Copyright &copy; 2014-2017 by [Lee Dohm](http://www.lee-dohm.com) and [Lifted Studios](http://www.liftedstudios.com). See [LICENSE](https://github.com/lee-dohm/language-generic-config/blob/master/LICENSE.md) for details.
+[MIT](https://github.com/lee-dohm/language-generic-config/blob/master/LICENSE.md)
