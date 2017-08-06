@@ -17,7 +17,8 @@
   "atomTestRunner": "./spec/runner",
   "devDependencies": {
     "atom-mocha-test-runner": "1.0.1",
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "standard": "^10.0.3"
   },
   "configSchema": {
     "enableAutomatch": {
