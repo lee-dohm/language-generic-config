@@ -13,7 +13,7 @@ The package supports formats which use `#` or `;` to introduce comments.
 
 ## Auto-matching "probable" config files
 
-Many generic configs in-the-wild use no standard file extension, or any extension at all.
+Many generic configs in the wild use no standard file extension, or any extension at all.
 The package is able to match unfamiliar configs as long as they contain "comment-like" lines:
 
 ~~~
@@ -34,7 +34,7 @@ With the package's default configuration, the above code will look like this:
 
 <img alt="Sample 2" width="433" src="sample-2.png" />
 
-You can customise how the package interprets "comment-lines" by tweaking the `automatchPattern` field in the package settings.
+You can customise how the package interprets "comment-like" by tweaking the `automatchPattern` field in the package settings.
 By default, the grammar is activated for any unknown file containing lines which start with `# ` or `; `:
 
 ~~~
