@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## **v1.4.0** &mdash; *Released: 2017-08-06*
+
+* PR [#11](https://github.com/lee-dohm/language-generic-config/pull/11) by [@Alhadis](https://github.com/Alhadis) &mdash; Add auto-detection for any file using # or ; for comments
+
 ## **v1.3.0** &mdash; *Released: 2016-11-27*
 
 * PR [#9](https://github.com/lee-dohm/language-generic-config/pull/9) by [@yudai-nkt](https://github.com/yudai-nkt) &mdash; Add support for gitignores other than `.gitignore`
