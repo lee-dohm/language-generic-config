@@ -7,42 +7,43 @@ module.exports = {
   expectScopeToBe,
   wait,
   waitToOpen,
-  waitToSettle,
+  waitToSettle
 }
 
-function open(fileName){
+function open (fileName) {
   const projectPath = path.join(__dirname, 'fixtures', fileName)
   return atom.workspace.open(projectPath).then(openedEditor =>
     Promise.resolve(editor = openedEditor))
 }
 
-function expectScopeToBe(...args){
+function expectScopeToBe (...args) {
   const grammar = editor.getGrammar()
   return expect(grammar ? grammar.scopeName : '').to.equal(...args)
 }
 
-function wait(delay = 100){
+function wait (delay = 100) {
   return new Promise(resolve => {
     setTimeout(() => resolve(), delay)
   })
 }
 
-function waitToSettle(){
-  return new Promise(done => {
-    if(editor.buffer.stoppedChangingTimeout){
+function waitToSettle () {
+  return new Promise(resolve => {
+    if (editor.buffer.stoppedChangingTimeout) {
       const cd = editor.onDidStopChanging(() => {
         cd.dispose()
-        done(editor)
+        resolve(editor)
       })
+    } else {
+      resolve(editor)
     }
-    else done(editor)
   })
 }
 
-function waitToOpen(fixtureFile){
-  return new Promise(done => {
+function waitToOpen (fixtureFile) {
+  return new Promise(resolve => {
     return open(fixtureFile)
       .then(() => waitToSettle())
-      .then(() => done())
+      .then(() => resolve())
   })
 }

@@ -1,33 +1,33 @@
 'use strict'
 
 const {expectScopeToBe, getEditor, waitToOpen} = require('./helpers')
-const {join} = require("path")
+const {join} = require('path')
 
-describe('Auto-matching', function(){
-  const nullScope    = 'text.plain.null-grammar'
+describe('Auto-matching', function () {
+  const nullScope = 'text.plain.null-grammar'
   const packageScope = 'text.generic-config'
-  const textScope    = 'text.plain'
-  const shellScope   = 'source.shell'
+  const textScope = 'text.plain'
+  const shellScope = 'source.shell'
   const gitConfScope = 'source.git-config'
-  const optEnable    = 'language-generic-config.enableAutomatch'
-  const optRegExp    = 'language-generic-config.automatchPattern'
-  const optMinLines  = 'language-generic-config.requireMinimumMatchingLines'
+  const optEnable = 'language-generic-config.enableAutomatch'
+  const optRegExp = 'language-generic-config.automatchPattern'
+  const optMinLines = 'language-generic-config.requireMinimumMatchingLines'
   let grammarPackage
   let atomEnv
 
-  beforeEach(function(){
+  beforeEach(function () {
     atomEnv = global.buildAtomEnvironment()
-    grammarPackage = atom.packages.loadPackage(join(__dirname, ".."))
+    grammarPackage = atom.packages.loadPackage(join(__dirname, '..'))
     return Promise.all([
       atom.packages.activatePackage('language-text'),
       atom.packages.activatePackage('language-shellscript'),
       atom.packages.activatePackage('language-git'),
-      grammarPackage.activate(),
+      grammarPackage.activate()
     ]).then(() => {
-      const textGrammar    = atom.grammars.grammarForScopeName(textScope)
+      const textGrammar = atom.grammars.grammarForScopeName(textScope)
       const packageGrammar = atom.grammars.grammarForScopeName(packageScope)
-      const shellGrammar   = atom.grammars.grammarForScopeName(shellScope)
-      const gitGrammar     = atom.grammars.grammarForScopeName(gitConfScope)
+      const shellGrammar = atom.grammars.grammarForScopeName(shellScope)
+      const gitGrammar = atom.grammars.grammarForScopeName(gitConfScope)
       expect(textGrammar).to.exist
       expect(packageGrammar).to.exist
       expect(shellGrammar).to.exist
@@ -35,12 +35,12 @@ describe('Auto-matching', function(){
     })
   })
 
-  afterEach(function(){
+  afterEach(function () {
     atomEnv.destroy()
 
     // Reset package options after each spec
     atom.config.set(optEnable, true)
-    atom.config.set(optRegExp, "^\\s*[;#]\\s")
+    atom.config.set(optRegExp, '^\\s*[;#]\\s')
     atom.config.set(optMinLines, 2)
   })
 

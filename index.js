@@ -7,12 +7,10 @@ const OPT_AM_ENABLE = `${PACKAGE_NAME}.enableAutomatch`
 const OPT_AM_REGEXP = `${PACKAGE_NAME}.automatchPattern`
 const OPT_MIN_LINES = `${PACKAGE_NAME}.requireMinimumMatchingLines`
 
-let autoMatchEnabled = undefined
-let autoMatchPattern = /^\s*[;#]\s/gm
-let editorObserver = null
+let autoMatchEnabled
 
 module.exports = {
-  activate(){
+  activate () {
     this.affectedEditors = new Map()
     this.disposables = new CompositeDisposable(
       atom.config.observe(OPT_AM_REGEXP, value => {
@@ -25,7 +23,7 @@ module.exports = {
     )
   },
 
-  deactivate(){
+  deactivate () {
     this.disposables.dispose()
     this.disposables = null
     this.affectedEditors.clear()
@@ -36,22 +34,27 @@ module.exports = {
    * Register handlers to respond to files which quack like configs.
    * @internal
    */
-  enableAutoMatch(){
-    if(autoMatchEnabled) return
+  enableAutoMatch () {
+    if (autoMatchEnabled) {
+      return
+    }
+
     autoMatchEnabled = true
 
     // Duplicate observers shouldn't exist… but better safe than sorry.
-    if(this.editorObserver)
+    if (this.editorObserver) {
       this.editorObserver.dispose()
+    }
 
     this.editorObserver = atom.workspace.observeTextEditors(editor => {
       // Only check editor's contents after a brief timeout, so other language
       // packages have a chance to do what we're doing (matching based on content).
       setTimeout(() => {
-        if(this.canAutoMatch(editor) && this.testAutoMatch(editor))
+        if (this.canAutoMatch(editor) && this.testAutoMatch(editor)) {
           this.assignGrammar(editor)
+        }
       }, 100)
-    });
+    })
   },
 
   /**
@@ -61,19 +64,22 @@ module.exports = {
    * possible to remove a file's highlighting when assigning {@link NullGrammar}.
    * @internal
    */
-  disableAutoMatch(){
-    if(!autoMatchEnabled && null == autoMatchEnabled) return
+  disableAutoMatch () {
+    if (!autoMatchEnabled && autoMatchEnabled == null) {
+      return
+    }
+
     autoMatchEnabled = false
 
-    if(this.affectedEditors.size){
+    if (this.affectedEditors.size) {
       const entries = Array.from(this.affectedEditors)
-      for(const [editor, disposables] of entries){
+      for (const [editor, disposables] of entries) {
         disposables.dispose()
         this.affectedEditors.delete(editor)
       }
     }
 
-    if(this.editorObserver){
+    if (this.editorObserver) {
       this.editorObserver.dispose()
       this.editorObserver = null
     }
@@ -86,22 +92,22 @@ module.exports = {
    * @return {Boolean}
    * @internal
    */
-  canAutoMatch(editor){
-    return atom.workspace.isTextEditor(editor)
-      && editor.isAlive()
-      && !this.affectedEditors.has(editor)
-      && !atom.textEditors.getGrammarOverride(editor)
-      &&  atom.grammars.nullGrammar === editor.getGrammar()
+  canAutoMatch (editor) {
+    return atom.workspace.isTextEditor(editor) &&
+      editor.isAlive() &&
+      !this.affectedEditors.has(editor) &&
+      !atom.textEditors.getGrammarOverride(editor) &&
+      atom.grammars.nullGrammar === editor.getGrammar()
   },
 
   /**
    * Execute the `autoMatch` pattern against an editor's contents.
-   * 
+   *
    * @param {TextEditor} editor
    * @return {Boolean} Whether the file appears to be a generic-config file
    * @internal
    */
-  testAutoMatch(editor){
+  testAutoMatch (editor) {
     const text = editor.getText() || ''
     const matches = text.match(this.autoMatchPattern) || []
     return matches.length >= atom.config.get(OPT_MIN_LINES)
@@ -115,17 +121,17 @@ module.exports = {
    * Doing this ensures auto-matched files won't take precedence over a
    * language package which may be installed later. It also makes sure the
    * overridden paths don't bloat the serialised project's metadata.
-   * 
+   *
    * @param {TextEditor} editor
    * @return {CompositeDisposables}
    * @internal
    */
-  assignGrammar(editor){
-
+  assignGrammar (editor) {
     // Run a quick sanity check to avoid doubling our listeners
     let disposables = this.affectedEditors.get(editor)
-    if(disposables)
+    if (disposables) {
       return disposables
+    }
 
     disposables = new CompositeDisposable(
       new Disposable(() => {
@@ -133,8 +139,9 @@ module.exports = {
         this.affectedEditors.delete(editor)
       }),
       editor.onDidChangeGrammar(grammar => {
-        if(grammar && grammar.scopeName !== PACKAGE_SCOPE)
+        if (grammar && grammar.scopeName !== PACKAGE_SCOPE) {
           this.unassignGrammar(editor)
+        }
       }),
       editor.onDidDestroy(() => this.unassignGrammar(editor))
     )
@@ -145,15 +152,18 @@ module.exports = {
 
   /**
    * Remove the grammar override tied to a specific editor.
-   * 
+   *
    * @param {TextEditor}
    * @internal
    */
-  unassignGrammar(editor){
-    if(!this.affectedEditors)
+  unassignGrammar (editor) {
+    if (!this.affectedEditors) {
       return
+    }
+
     const disposables = this.affectedEditors.get(editor)
-    if(disposables)
+    if (disposables) {
       disposables.dispose()
-  },
+    }
+  }
 }

@@ -17,7 +17,8 @@
   "atomTestRunner": "./spec/runner",
   "devDependencies": {
     "atom-mocha-test-runner": "1.0.1",
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "standard": "^10.0.3"
   },
   "configSchema": {
     "enableAutomatch": {
@@ -39,5 +40,9 @@
       "description": "Limit automatching to files containing at least *`n`* lines that match `automatchPattern`.",
       "order": 3
     }
+  },
+  "standard": {
+    "env": "mocha",
+    "globals": [ "atom", "expect" ]
   }
 }
